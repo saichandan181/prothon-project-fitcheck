@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+  
+    <style>
+        label {
+  display: block;
+  box-shadow: 0.1em 0.1em 0.2em #888;
+  margin: 1em;
+  border-radius: 1ex;
+  padding: 1ex 1em;
+}
+input[type=number] {
+  text-align: right;
+  border: none;
+}
+input {
+  float: right;
+}
+span {
+  font-weight: bold;
+}
+*{
+    background-color:black;
+    color: white;
+    font-size: 30px;
+    text-transform: capitalize;
+}
+.converter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+.converter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+</style>
+</head>
+
+<body>
+<h1 align="center" style="font-size: 40px;">calorie calculator</h1>
+<label>Female:
+  <input id="female" type="radio"  name="gender" onchange="calsPerDay()">
+</label>
+<label>Male:
+  <input id="male" type="radio" name="gender" onchange="calsPerDay()" checked>
+</label>
+<label>Age:
+  <input id="age" type="number" style="border-radius: 30px;" oninput="calsPerDay()" value="19">
+  years
+</label>
+<label>Height:
+  <input id="height" type="number" style="border-radius: 30px;" oninput="calsPerDay()" value="60">
+  in inches (12 inches=1 foot)
+</label>
+<div class="converter">
+  <h2>Feet to Inches Converter</h2>
+  <label for="feet">Feet:</label>
+  <input type="number" id="feet">
+  <label for="inches">Inches:</label>
+  <input type="number" id="inches" disabled>
+  <button onclick="convert()">Convert</button>
+</div>
+
+<label>Weight:
+  <input id="weight" type="number" style="border-radius: 30px;" oninput="calsPerDay()" value="140">
+  in pounds
+</label>
+<div class="converter">
+  <h2>Kg to Pound Converter</h2>
+  <label for="kg">Kilograms:</label>
+  <input style="color: white;" type="number" id="kg">
+  <label for="lb">Pounds:</label>
+  <input type="number" id="lb" disabled>
+  <button onclick="converter()">Convert</button>
+</div>
+
+<label align ="center">
+  Base metabolic rate: <span id="totalCals" style="color: red;"></span> kcal per day
+</label>
+
+<script type="text/javascript">
+    function calsPerDay() {
+  function find(id) { return document.getElementById(id) }
+
+  var age = find("age").value
+  var height = find("height").value * 2.54
+  var weight = find("weight").value / 2.2
+  var result = 0
+  if (find("male").checked) 
+    result = 66.47 + (13.75 * weight) + (5.0 * height - (6.75 * age))
+  else if (find("female").checked)
+    result = 665.09 + (9.56 * weight) + (1.84 * height - (4.67 * age))
+  find("totalCals").innerHTML = Math.round( result )
+}
+calsPerDay()
+function converter() {
+  var kg = document.getElementById("kg").value;
+  var lb = kg * 2.20462;
+  document.getElementById("lb").value = lb.toFixed(2);
+}
+function convert() {
+  var feet = document.getElementById("feet").value;
+  var inches = feet * 12;
+  document.getElementById("inches").value = inches;
+}
+
+
+
+</script>
+
+
+</body>
+<footer>
+  <p align="center" style="color: white;">Developed by Corvus Team</p>
+</footer>
